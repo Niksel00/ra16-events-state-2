@@ -1,19 +1,23 @@
-import React from 'react';
-import ShopCard from './ShopCard';
 import PropTypes from 'prop-types';
+import ShopCard from './ShopCard';
 
-export default function CardsView({ cards }) {
-  return (
-    <div className="CardsView">
-      {cards.map((card) => {
-        return (
-          <ShopCard card={card} key={card.name + card.color} />
-        );
-      })}
-    </div>
-  );
+function CardsView({ cards }) {
+	return (
+		<div className="shop-cards">
+			{cards.map((card, idx) => <ShopCard card={card} key={idx} />)}
+		</div>
+	)
 }
 
 CardsView.propTypes = {
-  cards: PropTypes.array.isRequired,
+	cards: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string,
+			price: PropTypes.string,
+			color: PropTypes.string,
+			img: PropTypes.string
+		})
+	).isRequired
 }
+
+export default CardsView;

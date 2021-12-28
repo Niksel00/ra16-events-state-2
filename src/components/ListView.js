@@ -1,19 +1,23 @@
-import React from 'react';
-import ShopItem from './ShopItem';
 import PropTypes from 'prop-types';
+import ShopItem from './ShopItem';
 
-export default function ListView({ items }) {
-  return (
-    <div className="ListView">
-      {items.map((item) => {
-        return (
-          <ShopItem item={item} key={item.name + item.color} />
-        );
-      })}
-    </div>
-  );
+function ListView({ items }) {
+	return (
+		<div className="shop-items">
+			{items.map((item, idx) => <ShopItem item={item} key={idx} />)}
+		</div>
+	)
 }
 
 ListView.propTypes = {
-  items: PropTypes.array.isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string,
+			price: PropTypes.string,
+			color: PropTypes.string,
+			img: PropTypes.string
+		})
+	).isRequired
 }
+
+export default ListView;

@@ -1,19 +1,26 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ShopItem({ item }) {
-  const background = { backgroundImage: 'url(' + item.img + ')' };
-  return (
-    <div className="ShopItem">
-      <div className="ShopItem-img" style={background} />
-      <div className="ShopItem-name">{item.name}</div>
-      <div className="ShopItem-color">{item.color}</div>
-      <div className="ShopItem-price">${item.price}</div>
-      <div className="ShopItem-button">Add to cart</div>
-    </div>
-  );
+function ShopItem({ item }) {
+	const { name, price, color, img } = item;
+
+	return (
+		<div className="shop-item">
+			<img className="item-product-img" src={img} alt={name}/>
+			<h3 className="product-name">{name}</h3>
+			<p className="product-color">{color}</p>
+			<p className="product-price">${price}</p>
+			<button className="add-btn">add to cart</button>
+		</div>
+	)
 }
 
 ShopItem.propTypes = {
-  item: PropTypes.object.isRequired,
+	item: PropTypes.shape({
+		name: PropTypes.string,
+		price: PropTypes.string,
+		color: PropTypes.string,
+		img: PropTypes.string
+	}).isRequired
 }
+
+export default ShopItem;

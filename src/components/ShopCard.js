@@ -1,20 +1,32 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ShopCard({ card }) {
-  const background = { backgroundImage: 'url(' + card.img + ')' };
-  return (
-    <div className="ShopCard" style={background}>
-      <div className="ShopCard-name">{card.name}</div>
-      <div className="ShopCard-color">{card.color}</div>
-      <div className="ShopCard-container">
-        <div className="ShopCard-price">${card.price}</div>
-        <div className="ShopCard-button">Add to cart</div>
-      </div>
-    </div>
-  );
+function ShopCard({ card }) {
+	const { name, price, color, img } = card;
+
+	return (
+		<div className="shop-card">
+			<div className="shop-card-header">
+				<h3 className="product-name card-product-name">{name}</h3>
+				<p className="product-color">{color}</p>
+			</div>
+			<div className="shop-card-img">
+				<img className="card-product-img" src={img} alt={name}/>
+			</div>
+			<div className="shop-card-footer">
+				<p className="product-price">${price}</p>
+				<button className="add-btn">add to cart</button>
+			</div>
+		</div>
+	)
 }
 
 ShopCard.propTypes = {
-  card: PropTypes.object.isRequired,
+	card: PropTypes.shape({
+		name: PropTypes.string,
+		price: PropTypes.string,
+		color: PropTypes.string,
+		img: PropTypes.string
+	}).isRequired
 }
+
+export default ShopCard;
